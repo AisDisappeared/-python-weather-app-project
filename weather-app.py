@@ -34,15 +34,18 @@ def get_weather_data(Lat=35.7219,Long=51.3347,API_KEY='5142d212b6ddc15d8d50c11cb
 
 
 data = (get_weather_data())
+# list comprehension 
 list_data = [value for key,value in data.items()]
 
 
+# insert function that insert data into database
 def insert_data(cursor,cnx,data=list_data):
     query = "INSERT INTO info VALUES(\'%s\',\'%s\',\'%s\',\'%s\',\'%s\')" % (str(list_data[0]), str(list_data[1]), str(list_data[2]), str(list_data[3]) , str(list_data[4]))
     cursor.execute(query)
     cnx.commit()
 
 
+# while loop to complete the script 
 while True :
     data_weather = get_weather_data()
     list_data_weather = [value for key,value in data_weather.items()]
